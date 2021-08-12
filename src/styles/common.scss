@@ -1,0 +1,142 @@
+/* SCROLL-BAR */
+
+.scroll-bar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+/* Track */
+.scroll-bar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0px #999999;
+  border-radius: 3px;
+}
+/* Handle */
+.scroll-bar::-webkit-scrollbar-thumb {
+  background: #999999;
+  border-radius: 3px;
+}
+/* Handle on hover */
+.scroll-bar::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+/* SCROLL-BAR */
+
+// scroll bar grid - table adding separate because class name coming from default //
+
+.ant-table-body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+/* Track */
+.ant-table-body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0px #999999;
+  border-radius: 3px;
+}
+/* Handle */
+.ant-table-body::-webkit-scrollbar-thumb {
+  background: #999999;
+  border-radius: 3px;
+}
+/* Handle on hover */
+.ant-table-body::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+
+// ant-select-dropdown scroll-bar//
+
+
+.MuiAutocomplete-listbox::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+/* Track */
+.MuiAutocomplete-listbox::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0px #999999;
+  border-radius: 3px;
+}
+/* Handle */
+.MuiAutocomplete-listbox::-webkit-scrollbar-thumb {
+  background: #999999;
+  border-radius: 3px;
+}
+/* Handle on hover */
+.MuiAutocomplete-listbox::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+// scroll for intellisensearch //
+
+.ant-select-dropdown{
+  .rc-virtual-list-holder{
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 0px #999999;
+      border-radius: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #999999;
+      border-radius: 3px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #999999;
+    }
+    
+  }
+}
+
+
+
+// select drop down //
+.ant-select-dropdown{
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-top: none;
+  box-sizing: border-box;
+  box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  .ant-select-item{
+    padding: 0 10px;
+    background-color: #ffffff;
+    .ant-select-item-option-selected:not(.ant-select-item-option-disabled){
+      background-color: #ffffff;
+    }
+    .ant-select-item-option-content{
+      color: #666666;
+      background-color: #ffffff;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 35px;
+      text-transform: capitalize;
+    }
+  }
+}
+
+
+
+.ant-select-open{
+  outline: none;
+  border: none;
+}
+
+.ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input)
+  .ant-select-selector {
+  border-color: #e5e5e5;
+}
+
+.ant-select-focused .ant-select-selector,
+.ant-select-selector:focus,
+.ant-select-selector:active,
+.ant-select-open .ant-select-selector {
+  box-shadow: none !important;
+}
+
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector{
+  border-color: #e5e5e5;
+}
+
+
+
+

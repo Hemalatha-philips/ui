@@ -1,0 +1,32 @@
+@import "../../styles/colors.scss";
+
+.Q-layout-root {
+	height: 100%;
+
+	section.ant-layout.layout {
+		height: 100%;
+	}
+	.site-layout-content {
+		min-height: 80vh;
+		padding: 24px;
+;
+	}
+
+	@media screen and (max-width:760px){
+		.site-layout-content {
+			min-height: 100vh;
+			height:100%
+		}
+	}
+	.logo {
+		float: left;
+		height: 31px;
+		padding:5px;
+		color:$white-color;
+		
+	}
+	
+		[data-theme="dark"] .site-layout-content {
+			background: #141414;
+		}
+}

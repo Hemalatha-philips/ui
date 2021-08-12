@@ -1,24 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss"
 
-function App() {
+import { BrowserRouter  ,Switch, Route, Redirect} from 'react-router-dom'
+import { ToastContainer } from "react-toastify";
+
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "./store";
+import QLayout from "./containers/layouts/Layout";
+
+const App = () => {
+
+	const userData = useSelector((state:RootState) => state.user)
+	console.log("user in app " , userData)
+
+	const {user} = userData ? {user:userData}: {user:null}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Q-root">
+			<BrowserRouter>
+    <Switch>
+
+		<Route exact path="/" component = {() => <QLayout auth={user} />} />
+	
+		
+
+</Switch>
+  </BrowserRouter>
+	<ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+
+          <ToastContainer />
     </div>
   );
 }
