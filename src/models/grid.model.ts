@@ -1,6 +1,7 @@
-import { JSXElement } from "@babel/types";
+
 
 export declare type SortOrder = "descend" | "ascend" | null;
+export declare type textcasetype = "upper" | "lower" | "sentence";
 export declare type PagintionPosition =
   | "topRight"
   // | "topCenter"
@@ -22,7 +23,14 @@ export interface ColumnFilterItem {
 }
 
 export interface Grid<RecordType = unknown> {
+  isDataLoaded?: boolean;
   gridName: string;
+  isSingleSorted?: boolean;
+  isMultiSorted?: boolean;
+  sortedInfo?: any;
+  multiSortedInfo?: any;
+  isFiltered?: boolean;
+  filteredInfo?: any;
 
   className?: string;
   rowClassName?: string | RowClassName<any>;
@@ -33,24 +41,35 @@ export interface Grid<RecordType = unknown> {
   onSettingsClick?: "grid-menu";
   isRowSelectionEnabled?: boolean;
   isRowSelectorCheckbox?: boolean;
-
+  rowSelection?: any;
   columns: Column<RecordType>[];
   data: RecordType[];
   fixedColumnKeys: string[];
-  pinnedColumns?: string[]; 
+  pinnedColumns?: string[]; // TODO: need to support pinning feature if required
 
   pagintionPosition: PagintionPosition;
   enableColumnDrag?: boolean;
-	enableResizingOfColumns?: boolean;
-	isPinningEnabled?:boolean;
+  enableResizingOfColumns?: boolean;
+  isAllRowsSelected?: boolean;
   summary?: (data: RecordType[]) => React.ReactNode; // to add a summary row in grid
-  settingsTriDotMenuClick?: (item: GridMenu) => void;
+  settingsTriDotMenuClick?: (item: GridMenu, data?: any) => void;
   rowSelectionChange?: (data: any, isMultiple?: boolean) => void;
   settingsTriDotClick?: (data: RecordType) => void;
-  onColumnCellClick?: (record:RecordType, key:string) => void;
-  actionItems?: (record:RecordType, key:string) => any;
+  onColumnCellClick?: (record, key) => void;
+  onsettingsTriDotDropDownItemClick?: (dataRow: any, item: any) => void;
   onColumnChange?: (columns: Column<any>[]) => void;
 
+  applySort?: (key: string, order: string, sortedInfo?: any) => void;
+  applyMultiSort?: (sorter: any, sortedInf: any) => void;
+  onMultiSortToggle?: (isMultiSortOn: boolean) => void;
+
+  rowSelectionChangeFromCell?: (
+    key: string,
+    data: any,
+    isSelected: boolean
+  ) => void;
+  onSelectAllRows?: (isSelected: boolean) => void;
+  actionItems?: (record, key) => any;
   hideResults?: boolean;
   hideItemsPerPage?: boolean;
   hidePageJumper?: boolean;
@@ -72,11 +91,12 @@ export interface Grid<RecordType = unknown> {
   preferences?: { columnKey: string; hidden: boolean }[];
   settingsWidth?: number;
   searchOptions?: any;
+  isPinningEnabled?: any;
 }
 
 export interface ExpandableConfig<RecordType> {
   isExpandable?: boolean;
-  expandedRowRender?: (props:any) => JSX.Element;
+  expandedRowRender?: (props) => JSX.Element;
 
   expandCloseIcon?: JSX.Element;
   expandOpenIcon?: JSX.Element;
@@ -100,14 +120,15 @@ export interface FilterDropdownProps {
 }
 export interface Column<RecordType> {
   displayTitle: string;
-  textCase?: "upper" | "lower" | "sentence";
+  headerCellSelection?: boolean;
+  textCase?: textcasetype;
   className?: string;
   showToolTip?: boolean;
   formatter?: JSX.Element;
-  complexObjectIndex?: string;
+  showDecimals?: boolean;
   cellWrapper?: (props: any) => JSX.Element;
-  toolTip?: (props:any) => JSX.Element;
-  customContent?: (props:any) => JSX.Element;
+  toolTip?: (props) => JSX.Element;
+  customContent?: (props) => JSX.Element;
   isFilterable?: boolean;
   key: string;
   fixed?: "left" | "right";
@@ -124,9 +145,9 @@ export interface Column<RecordType> {
   isClickable?: boolean;
 
   //DEPRECATED
-  onCellClick?: (record:RecordType, key:string) => void;
-  onClickExpand?: boolean;
-  componentToOpenOnClickingCell?: (props:any) => JSX.Element;
+  onCellClick?: (record, key) => void;
+
+  componentToOpenOnClickingCell?: (props) => JSX.Element;
   isFilterble?: boolean;
 
   sorter?: {

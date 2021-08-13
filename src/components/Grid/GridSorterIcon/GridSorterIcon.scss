@@ -1,0 +1,19 @@
+@import "../../../styles/common.scss";
+@import "../../../styles/colors.scss";
+@import "../../../styles/fonts.scss";
+
+.Q-grid__grid-block__table-block {
+  
+    .Q-grid-sorter-icon-root {
+   
+      &__sorter-up {
+        position: relative;
+        left: 16px;
+      }
+      &__sorter-down {
+        position: relative;
+        left: 16px;
+      }
+    }
+  
+}

@@ -92,15 +92,15 @@ export const SubmitButton = styled.button`
   color: #fff;
   font-weight: 600;
   border: none;
-  border-radius: 100px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 250ms ease-in-out;
   background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(51, 45, 110, 1) 35%,
-    rgba(0, 212, 255, 1) 100%
+		rgba(26,88,163,1) 0%,
+    rgba(28,141,201,1) 35%,
+    rgba(28,141,201,1) 100%
   );
 
   &:hover {
@@ -122,12 +122,13 @@ export const Button = styled.button`
   background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(51, 45, 110, 1) 35%,
-    rgba(0, 212, 255, 1) 100%
+    rgba(26,88,163,1) 0%,
+    rgba(28,141,201,1) 35%,
+    rgba(28,141,201,1) 100%
   );
 
   &:hover {
     filter: brightness(1.03);
   }
 `;
+

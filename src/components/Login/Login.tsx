@@ -3,7 +3,7 @@
 import { useState,useEffect } from 'react';
 import { BUTTONTEXT } from '../../content/en/buttons';
 
-import { toast } from "react-toastify";
+
 import { useHistory,useLocation } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,37 +19,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '../../actions/user.action';
 import { RootState } from '../../store';
 import {QCard } from "../Card/Card"
+import { showToast } from '../../utils/toast';
 
 const INITIAL_USER_STATE = {
-	user:{role:null},
+	user:{role:null,userId:null},
 	loading:false,
 	error:""
 }
 
-const showToast = (type) => {
-	if(type === 0){
-		toast.error("Error", {
-			position: "top-right",
-			autoClose: 500,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined
-		});
-	}else{
-		toast.success("Success", {
-			position: "top-right",
-			autoClose: 500,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined
-		});
-	}
-	
-}
+
 const Login = () => {
 
 	const [email, setEmail] = useState("");
@@ -64,9 +42,9 @@ const userData = useSelector((state:RootState) => state.user)
 
 const { loading , error , user } = userData ? userData: INITIAL_USER_STATE
 
-useEffect(() => {
-	if(user && user.role) history.push('/admin')
-},[])
+// useEffect(() => {
+// 	if(user && user.role) history.push('/admin')
+// },[])
 
 useEffect(() => {
 	if(user){
@@ -91,6 +69,12 @@ useEffect(() => {
 		dispatch(fetchUser(request, showToast))
     
 	}
+
+	const onKeyPress = e => {
+	  if(e.code === 'Enter' && email && password){
+			onLogin()
+		}
+	}
 	
   return (
 		<>
@@ -98,10 +82,10 @@ useEffect(() => {
 
 	
 		<BoxContainer>
-		<FormContainer>
+		<FormContainer >
 			<FormInput
 				value={email}
-				width="300px"
+				onKeyPress={onKeyPress}
 				name="email"
 				onChange={e => setEmail(e.target.value)}
 				type="email"
@@ -109,7 +93,7 @@ useEffect(() => {
 			/>
 
 			<FormInput
-			width="300px"
+		onKeyPress={onKeyPress}
 				value={password}
 				name="password"
 				onChange={e => setPassword(e.target.value)}
@@ -120,7 +104,7 @@ useEffect(() => {
 		<br />
 		<MutedLink href="#">Forgot password?</MutedLink>
 		<br />
-		<SubmitButton onClick={onLogin} type="button">
+		<SubmitButton  onClick={onLogin} type="submit">
 			{BUTTONTEXT.login}
 		</SubmitButton>
 		<br />
