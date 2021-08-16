@@ -3,14 +3,15 @@ import thunk from "redux-thunk"
 import { composeWithDevTools } from "redux-devtools-extension"
 
 
-import { productListReducer } from "./reducers/product.reducer"
+import { productListReducer, productReviewsListReducer } from "./reducers/product.reducer"
 import { userReducer } from "./reducers/user.reducer"
 
 
 
 const reducer = combineReducers({
 	user:userReducer,
-	products:productListReducer
+	products:productListReducer,
+	productReviews:productReviewsListReducer
 
 })
 

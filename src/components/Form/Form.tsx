@@ -31,6 +31,13 @@ font-weight:500;
 text-decoration:none;
 `;
 
+export const QTitle = styled.h2`
+ font-size:${props => props.fontSize ? props.fontSize:'20px'};
+ margin-top:16px;
+ color:${props => props.color ? props.color:'rgba(26,88,163,1)'};
+ font-weight:bold;
+ `
+
 export const BoldLink = styled.a`
 font-size:12px;
 rgb(2, 0, 36,0.8);
@@ -131,4 +138,5 @@ export const Button = styled.button`
     filter: brightness(1.03);
   }
 `;
+
 

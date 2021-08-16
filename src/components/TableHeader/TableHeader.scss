@@ -1,0 +1,22 @@
+@import "../../styles/common.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/fonts.scss";
+
+
+
+.Q-table-header-root {
+
+	&__panel__label{
+		display: inline-block;
+		margin-top: 5px;
+		margin-left: 50px;
+	}
+	.ant-collapse-header{
+		text-align: left;
+		
+	}
+
+	& > .ant-collapse-item.ant-collapse-no-arrow > .ant-collapse-header {
+		color:$primary-color;
+	}
+}

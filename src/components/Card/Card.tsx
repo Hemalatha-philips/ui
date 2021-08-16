@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
-  max-width: 500px;
+  max-width: ${props => props.width ? props.width:'500px'};
 
   display: flex;
   flex-direction: column;
@@ -15,6 +15,10 @@ const StyledContainer = styled.div`
   box-shadow: 15px 20px 70px -10px;
 `;
 
-export const QCard:React.FC = ({children}) => {
-	 return <StyledContainer>{children}</StyledContainer>
+
+interface QCardProps {
+	width?:string
+}
+export const QCard:React.FC<QCardProps> = ({width,children}) => {
+	 return <StyledContainer width={width ? width:'500px'}>{children}</StyledContainer>
 }

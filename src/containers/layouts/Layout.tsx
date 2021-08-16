@@ -54,7 +54,7 @@ const QLayout:React.FC<any> = ({children}) => {
 				
 			</div>
     </Content>
-    <Footer style={{ textAlign: 'center' }}>{HEADINGS.siteTitle} &copy; 2021 </Footer>
+    {/* <Footer style={{ textAlign: 'center' }}>{HEADINGS.siteTitle} &copy; 2021 </Footer> */}
   </Layout>
 		</div>
 	)

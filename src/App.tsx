@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch,Redirect } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import "./App.scss";
-import TestGrid from "./components/Grid/TestGrid/TestGrid";
+
 import Login from './components/Login/Login';
 import { Admin } from './containers/layouts/Admin';
 import QLayout from "./containers/layouts/Layout";
@@ -31,7 +31,7 @@ const App = () => {
 		<Route exact path="/login" component = {(props) => <QLayout auth={user}>
 			<Login {...props} />
 		</QLayout>} />
-		<Route exact path="/qa/grid" component ={TestGrid} />
+	
 	
 		
 
