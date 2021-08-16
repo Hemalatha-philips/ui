@@ -1,18 +1,18 @@
 export const tooltipData = [
 	{
-		 label:"Philips Sonicare",
+		 label:" Sonicare",
 		 labelValue:"400", 
 	},
 	{
-		label:"Philips Sonicare",
+		label:" Sonicare",
 		labelValue:"400", 
  },
  {
-	label:"Philips Sonicare",
+	label:" Sonicare",
 	labelValue:"400", 
 },
 {
-	label:"Philips Sonicare",
+	label:" Sonicare",
 	labelValue:"400", 
 },
 ];

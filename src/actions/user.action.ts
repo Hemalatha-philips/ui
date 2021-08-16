@@ -47,7 +47,7 @@ export const logoutUser = (request,toast,callback) => async (dispatch) => {
 const dummmyLogin:(request) => Promise<any> = async (request) => {
 	const promise = new Promise((resolve,reject) => {
 		setTimeout(() => {
-			if(request.email === 'admin@philips.com' && request.password === 'welcome123'){
+			if(request.email === 'admin@qualytics.com' && request.password === 'welcome123'){
 				console.log("resolving ")
 				resolve({data:{user:{role:'admin',userId:'PH900'}}})
 			}	else{
