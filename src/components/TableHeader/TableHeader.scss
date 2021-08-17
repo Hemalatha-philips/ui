@@ -9,11 +9,18 @@
 	&__panel__label{
 		display: inline-block;
 		margin-top: 5px;
-		margin-left: 50px;
+		// margin-left: 50px;
+		font-weight:bold;
 	}
 	.ant-collapse-header{
+		font-weight: bold;
 		text-align: left;
 		
+	}
+
+	&__download{
+		float:right;
+		font-size:20px;
 	}
 
 	& > .ant-collapse-item.ant-collapse-no-arrow > .ant-collapse-header {

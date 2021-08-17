@@ -3,8 +3,10 @@
  * 
  */
 
+import { CaretDownOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
 import { products } from '../../mocks/data/products';
+import { QCheckbox } from './Checkbox';
 
 
 const { Option } = Select;
@@ -14,10 +16,16 @@ interface QSelectProps {
 	placeholder:string;
 	selected?:any;
 	width:number;
+	multiple?:boolean;
 	onSelect:(id:number) => void
 }
 
-export const QSelect:React.FC<QSelectProps> = ({items,placeholder,onSelect,selected,width}) => {
+export const QSelect:React.FC<QSelectProps> = ({
+
+	multiple,
+	items,
+	placeholder,
+	onSelect,selected,width}) => {
 
 	/**
 	 * @function onChange
@@ -29,26 +37,35 @@ export const QSelect:React.FC<QSelectProps> = ({items,placeholder,onSelect,selec
 		console.log(`selected ${value}`);
 		onSelect(value)
 	}
-	
+
 
 	
 
+	
+console.log("selected " , selected)
 
 	return(
 		<Select
-    // showSearch
+		// showSearch
+		suffixIcon={<CaretDownOutlined />}
 		style={{ width: width }}
-		value={selected && selected.id}
+		value={selected && !multiple ? selected.id:selected && selected.map(item => item.id)}
     placeholder={placeholder}
     optionFilterProp="children"
-    onChange={onChange}
+		onChange={onChange}
+		mode={multiple ? "multiple":undefined}
+		allowClear
     // onFocus={onFocus}
     // onBlur={onBlur}
     // onSearch={onSearch}
     // filterOption={(input, option) =>  option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
     // }
   >
-    {items.map(p => <Option key={p.id} value={p.id}>{p.name}</Option>)}
+		{items.map(p => <Option key={p.id} value={p.id}>
+		
+		{p.name}</Option>)
+		
+		}
     
   </Select>
 	)

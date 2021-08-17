@@ -1,0 +1,15 @@
+.Q-table-root {
+	.ant-table-cell{
+		font-weight:bold;
+		color:#000;
+	}
+
+	th.ant-table-cell{
+		font-weight:bold;
+	}
+
+	td.ant-table-cell{
+		border:1px solid black;
+		border-right:1px solid black !important;
+	}
+}

@@ -5,14 +5,14 @@ export const products = [
 	},
 	{
 		id:2,
-		name:"Sonicare 2"
+		name:"Sonicare Kids"
 	},
 	{
 		id:3,
-		name:"Sonicare 3"
+		name:"LumeaIPL"
 	},
 	{
 		id:4,
-		name:"Sonicare 3"
+		name:"GroomTribe"
 	}
 ]

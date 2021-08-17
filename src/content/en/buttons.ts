@@ -1,5 +1,6 @@
 export const BUTTONTEXT = {
 	submit: "Submit",
 	login:"Login",
-	logout:"Logout"
+	logout:"Logout",
+	admin:"Admin"
 }

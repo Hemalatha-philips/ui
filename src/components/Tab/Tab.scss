@@ -110,14 +110,16 @@
 		.ant-tabs-tab {
 			padding: 0 0 !important;
 			margin: 0px 0 0 19.97px;
+			margin-left: 0;
 			font-style: normal;
-			font-weight: normal;
+			font-weight: bold;
+			background-color: $secondary-color;
 			font-size: 14px;
 			line-height: 50px;
 			width:100% !important;
 			text-align: center;
 
-			color: #666666;
+			color: $color-white;
 			transition: 0s;
 			&:hover {
 				color: #666666 !important;
@@ -133,10 +135,11 @@
 		.ant-tabs-tab-active {
 			height: 52px;
 			margin-left:0;
+			background-color: $primary-color;
 			// background-color:$primary-color;
 			.ant-tabs-tab-btn {
 				font-weight: 700 !important;
-				color: #2055b5 !important;
+				color:$color-white !important;
 				width: 100%;
 				// color:$color-white;
 				font-size: 14px !important;

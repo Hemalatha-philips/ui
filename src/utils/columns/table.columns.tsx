@@ -1,6 +1,6 @@
 import { EyeOutlined } from '@ant-design/icons';
 import moment from 'moment';
-export const tableColumns = (actionHandler) => {
+export const tableColumns = (actionHandler?:any) => {
 	return [
 		{
 			id:1,
@@ -8,20 +8,23 @@ export const tableColumns = (actionHandler) => {
 			dataIndex: 'language',
 			width:'100px',
 			key: 'language',
-			render: text => <a>{text}</a>,
+			
+			render: text => <span>{text}</span>,
 		},
 		{
 			id:2,
 			title: 'Country',
 			dataIndex: 'country',
 			width:'100px',
+			
 			key: 'country',
 		},
 		{
 			id:3,
 			title: 'Version',
 			dataIndex: 'version',
-			width:'80px',
+			width:'100px',
+			
 			key: 'version',
 		},
 		{
@@ -29,6 +32,7 @@ export const tableColumns = (actionHandler) => {
 			title: 'User',
 			width:'100px',
 			key: 'user',
+			
 			dataIndex: 'user',
 
 		},
@@ -37,6 +41,7 @@ export const tableColumns = (actionHandler) => {
 			title: 'Date',
 			key: 'date',
 			width:'120px',
+			
 			dataIndex: 'date',
 			render:record => <span>{moment(record.date).format('Do, MMM YY')}</span>
 
@@ -45,6 +50,7 @@ export const tableColumns = (actionHandler) => {
 			id:6,
 			title: 'Rating',
 			key: 'rating',
+			
 			dataIndex: 'rating',
 			width:'80px'
 
@@ -53,7 +59,8 @@ export const tableColumns = (actionHandler) => {
 			id:7,
 			title: 'Review',
 			key: 'review',
-			width:'200px',
+			width:'400px',
+			
 			dataIndex: 'review'
 
 		},
@@ -61,14 +68,16 @@ export const tableColumns = (actionHandler) => {
 			id:8,
 			title: 'English Translation',
 			key: 'englishReview',
+			
 			dataIndex: 'englishReview',
-			width:'200px'
+			width:'400px'
 
 		},
 		{
 			id:9,
 			title: 'Action',
 			width:'80px',
+		
 			key: 'action',
 			render: (record) => (
 				<EyeOutlined style={{cursor:'pointer'}} onClick={() => {

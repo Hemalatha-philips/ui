@@ -1,6 +1,8 @@
+
 import { Col, Row } from 'antd';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts, listReviews } from '../../actions/products.action';
 import { QCard } from '../../components/Card/Card';
@@ -32,7 +34,8 @@ export const Admin = () => {
  const [limit,setLimit] = useState(() => DEFAULT_LIMIT)
  const [selectedDevice,setSelectedDevice] = useState(() => DEVICE.ANDROID)
 
- const [selectedProduct , setSelectedProduct] =useState(null)
+ const [selectedProduct , setSelectedProduct] =useState<any>(undefined)
+ const [selectedColumns ,setSelectedColumns] = useState(() => tableColumns())
 
 
 	const dispatch = useDispatch()
@@ -41,7 +44,12 @@ export const Admin = () => {
 	const {   products } = productsState
 	const { product } = reviewsState
 
-	console.log("Product in component is " , product)
+	console.log("Product in component is " , products.find(p => p.id === selectedProduct))
+
+	const getTablabels  = useMemo(deviceTabLabels, [])
+
+	const getColumns = useMemo(() => tableColumns(),[])
+	const getData = useMemo(getTestGridData , [])
 
 	useEffect(() => {
 		dispatch(listProducts())
@@ -76,15 +84,50 @@ export const Admin = () => {
 		console.log("action " , record)
 	}
 
+	const getSelectedProduct =() => {
+		return products.find(p => p.id === selectedProduct)
+	}
+
+
 	const onRecordSizeSelect = size => {
 		console.log("size selected " , size)
 		setLimit(size)
 		
 	}
 
-	const getTablabels  = useMemo(deviceTabLabels, [])
-	const getColumns = useMemo(() => tableColumns(onAction),[])
-	const getData = useMemo(getTestGridData , [])
+	const onColumnsSelect = value => {
+		const columns = getColumns.filter(c => value.indexOf(c.id) !== -1)
+		console.log("filtered columsn " , columns)
+		setSelectedColumns(columns)
+	}
+
+	const getCsvData = () => {
+		let csvData:any[] = []
+		const columns = getColumns.map(c => c.title).filter(c => c !== 'Action')
+		let rows:any[] = []
+		getData.forEach(p => {
+			let row:any[] = []
+			getColumns.map(c => c.key).forEach(k => {
+				
+				row.push(p[k])
+			})
+
+		
+			rows.push(row)
+		})
+
+	
+		csvData = [...rows]
+		csvData.unshift(columns)
+
+		return csvData
+		
+		
+	}
+
+	
+
+
 
 	return (
 		<div className="Q-admin-root">
@@ -101,7 +144,7 @@ export const Admin = () => {
 				</QCard>
 
 				{!productsState.loading && selectedProduct && <QCard width={`100%`}>
-					{reviewsState.loading ? <QLoader />: <> 
+				
 						<div className="Q-Admin-root__tabs Q-tabs-root">
 							<QTab   
 							 activeTabIndex={selectedDevice === DEVICE.ANDROID ? 1 : 2}  
@@ -110,19 +153,26 @@ export const Admin = () => {
 							tabList={getTablabels} />
 						</div>
 					<div className="Q-Admin-root__grid">
-						<QTitle>{product.name}</QTitle>
+						<QTitle>{getSelectedProduct().name}</QTitle>
+				
 						<QTableHeader 
+						csvData={getCsvData()}
 						columns={getColumns.map(c => {
 							return {id:c.id, name:c.title}
 						})}
-						selectedColumns={getColumns.map(c => {
+						selectedColumns={selectedColumns.map(c => {
 							return {id:c.id, name:c.title}
 						})}
 						selectedRecordSize={RECORD_SIZES.find(item => item.name === limit)!}
+						onColumnsSelect={onColumnsSelect}
 						onRecordSizeSelect={onRecordSizeSelect} title="Review Details View" />
-				 <Qtable data={getData} columns={getColumns} />
+				 <Qtable loading={
+					 {
+						 spinning:reviewsState ? reviewsState.loading:false,
+						 indicator:<QLoader />
+						 }} data={getData} columns={selectedColumns} />
 					</div>
-					</>}
+					
 				
 				</QCard>}
 			</Col>

@@ -34,7 +34,7 @@ text-decoration:none;
 export const QTitle = styled.h2`
  font-size:${props => props.fontSize ? props.fontSize:'20px'};
  margin-top:16px;
- color:${props => props.color ? props.color:'rgba(26,88,163,1)'};
+ color:${props => props.color ? props.color:'#0A5ED7'};
  font-weight:bold;
  `
 

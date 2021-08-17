@@ -9,8 +9,8 @@ export const getTestGridData = () => {
 			user: "HGS",
 			date:"2021-05-02",
       rating: 1,
-      review: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
-      englishReview: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
+      review: "lorem ipsum lorem ipsulorem ipsum",
+      englishReview: "lorem ipsulorem ipsum lorem ipsum",
   
       items: [
         {
@@ -35,8 +35,8 @@ export const getTestGridData = () => {
 			user: "HGS",
 			date:"2021-05-01",
       rating: 1,
-      review: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
-      englishReview: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
+      review: "lorem ipsum lorem ipsum  lorem ipsum lorem ipsum lorem ipsum",
+      englishReview: "lorem ipsum lorem lorem ipsum lorem ipsum lorem ipsum",
   
       items: [
         {
@@ -61,8 +61,8 @@ export const getTestGridData = () => {
 			user: "HGS",
 			date:"2021-04-26",
       rating: 1,
-      review: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
-      englishReview: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
+      review: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
+      englishReview: "lorem ipsum lorem lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
   
       items: [
         {

@@ -1,3 +1,3 @@
 export const HEADINGS = {
-	siteTitle: "QUALYTICS"
+	siteTitle: "QUALITICS"
 }

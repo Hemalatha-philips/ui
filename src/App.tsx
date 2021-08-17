@@ -25,7 +25,7 @@ const App = () => {
 						from:props.location
 					}
 		}} />} />
-		<ProtectedRoute exact path="/admin" component = {(props) => <QLayout auth={user}>
+		<Route exact path="/admin" component = {(props) => <QLayout auth={user}>
 			<Admin {...props} />
 		</QLayout>} />
 		<Route exact path="/login" component = {(props) => <QLayout auth={user}>
