@@ -7,13 +7,21 @@ interface QTableProps {
 	columns:any[];
 	data:any[];
 	loading:any;
+	total:number;
+	pageSize:number;
+	currentPage:number;
+	onPageChange:(p:number) => void
+
 }
 
 export class Qtable extends React.Component<QTableProps> {
+
 	render(){
-		const { columns , data,loading } = this.props
+	
+		const { columns , data,loading,total,pageSize,currentPage,onPageChange } = this.props
 		return(
 			<Table 
+			pagination = {{total,pageSize,onChange:onPageChange,current:currentPage}}
 			loading={loading}
 			className="Q-table-root"
 			bordered

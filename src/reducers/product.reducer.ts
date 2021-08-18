@@ -21,7 +21,7 @@ export const productReviewsListReducer = (state = {product:{reviews:[]}}, action
 		case PRODUCT_REVIEWS_LIST_REQUEST:
 			return {loading:true, product:{reviews:[]}, count:0}
 		case PRODUCT_REVIEWS_LIST_SUCCESS:
-			return {loading:false, product:action.payload.data, count:action.payload.count}
+			return {loading:false, product:action.payload, count:action.payload.count}
 		case PRODUCT_REVIEWS_LIST_FAIL:
 			return {loading:false, error:action.payload}
 		default:

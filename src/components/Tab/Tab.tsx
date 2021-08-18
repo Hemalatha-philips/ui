@@ -23,7 +23,7 @@ export const QTab:React.FC<TabProps> = ({
 	count,
 	countIndex} ) => {
 
-		console.log(" acive tab " , activeTabIndex)
+
 	return (
 		
 		<Tabs

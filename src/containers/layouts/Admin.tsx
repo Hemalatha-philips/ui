@@ -1,8 +1,6 @@
 
 import { Col, Row } from 'antd';
-
 import { useCallback, useEffect, useMemo, useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts, listReviews } from '../../actions/products.action';
 import { QCard } from '../../components/Card/Card';
@@ -12,7 +10,6 @@ import QLoader from '../../components/Loader/Loader';
 import { QTab } from '../../components/Tab/Tab';
 import { Qtable } from '../../components/Table/Table';
 import { QTableHeader } from '../../components/TableHeader/TableHeader';
-import { getTestGridData } from '../../mocks/data/testgrid.data';
 import { ProductReviewsState, ProductsState } from '../../models/products.state.model';
 import { deviceTabLabels } from '../../models/tab.model';
 import { RootState } from '../../store';
@@ -24,13 +21,15 @@ import { RECORD_SIZES } from '../../utils/record-sizes';
 
 
 
-const DEFAULT_LIMIT = 25;
+
+
+const DEFAULT_LIMIT = 1;
 enum DEVICE {ANDROID = 'Android', IOS = 'iOS'}
 // import "./Admin.scss"
 export const Admin = () => {
 
 	//state variables for the reviews grid
- const [offset,setOffset] = useState(0)
+ const [offset,setOffset] = useState(1)
  const [limit,setLimit] = useState(() => DEFAULT_LIMIT)
  const [selectedDevice,setSelectedDevice] = useState(() => DEVICE.ANDROID)
 
@@ -44,20 +43,39 @@ export const Admin = () => {
 	const {   products } = productsState
 	const { product } = reviewsState
 
-	console.log("Product in component is " , products.find(p => p.id === selectedProduct))
+
+	
 
 	const getTablabels  = useMemo(deviceTabLabels, [])
 
 	const getColumns = useMemo(() => tableColumns(),[])
-	const getData = useMemo(getTestGridData , [])
+	const getData = useMemo(() =>{
+		const start = (offset-1) * limit
+		const end = start + limit
+	
+		return product ? product.reviews.slice(start,end):[]
+	}  , [product , product.id,limit,offset])
 
+
+	const getTotal = useMemo(() => product && product.reviews && product.reviews.length ? product.reviews.length: 0,[product,product.id])
 	useEffect(() => {
 		dispatch(listProducts())
 	},[])
 
 	useEffect(() => {
-		if(selectedProduct)
-			dispatch(listReviews(selectedProduct!,selectedDevice,offset,limit))
+		if(selectedProduct){
+			const name = getSelectedProduct().name
+			const getSelectedDeviceId = () => {
+				
+				const selectedDeviceId = getSelectedProduct().product_ids.find(item => item.device === selectedDevice.toLowerCase())
+				
+				return selectedDeviceId.product_id
+			}
+			const deviceId = getSelectedDeviceId()
+		
+			dispatch(listReviews(selectedProduct!,name, deviceId,offset,limit))
+		}
+			
 	},[selectedProduct,selectedDevice,offset,limit])
 
 	/**
@@ -67,12 +85,12 @@ export const Admin = () => {
 	 * @author Deepak_T
 	 */
 	const onSelect = useCallback(id => {
-		console.log("admin product " , id)
+	
 		setSelectedProduct(id)
 	},[])
 
 	const onClickTab = selectedTab => {
-		console.log("selected tab " , selectedTab)
+		
 		if(selectedTab == 1)setSelectedDevice(DEVICE.ANDROID)
 		 
 		else if(selectedTab == 2) setSelectedDevice(DEVICE.IOS)
@@ -88,16 +106,19 @@ export const Admin = () => {
 		return products.find(p => p.id === selectedProduct)
 	}
 
+const onPageChange = p => {
+	setOffset(p)
+}
 
 	const onRecordSizeSelect = size => {
-		console.log("size selected " , size)
+	
 		setLimit(size)
 		
 	}
 
 	const onColumnsSelect = value => {
 		const columns = getColumns.filter(c => value.indexOf(c.id) !== -1)
-		console.log("filtered columsn " , columns)
+	
 		setSelectedColumns(columns)
 	}
 
@@ -105,7 +126,9 @@ export const Admin = () => {
 		let csvData:any[] = []
 		const columns = getColumns.map(c => c.title).filter(c => c !== 'Action')
 		let rows:any[] = []
-		getData.forEach(p => {
+
+		const reviewData = product ? product.reviews:[]
+		reviewData.forEach(p => {
 			let row:any[] = []
 			getColumns.map(c => c.key).forEach(k => {
 				
@@ -166,7 +189,12 @@ export const Admin = () => {
 						selectedRecordSize={RECORD_SIZES.find(item => item.name === limit)!}
 						onColumnsSelect={onColumnsSelect}
 						onRecordSizeSelect={onRecordSizeSelect} title="Review Details View" />
-				 <Qtable loading={
+				 <Qtable
+				 total={getTotal}
+				 pageSize={limit}
+				 currentPage={offset}
+				 onPageChange={onPageChange}
+				  loading={
 					 {
 						 spinning:reviewsState ? reviewsState.loading:false,
 						 indicator:<QLoader />

@@ -1,8 +1,9 @@
 import { PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_REVIEWS_LIST_FAIL, PRODUCT_REVIEWS_LIST_REQUEST, PRODUCT_REVIEWS_LIST_SUCCESS } from "../constants/product.constant"
 
-import api from "../config/http-helper"
-import { products } from "../mocks/data/products"
-import { getTestGridData } from "../mocks/data/testgrid.data"
+
+import productService from "../services/product.service"
+
+import { getProductsTest, getReviewsByIdTest } from "./server"
 
 /**
  * @function listProducts
@@ -14,8 +15,11 @@ export const listProducts = () => async (dispatch) => {
 
 		dispatch({type: PRODUCT_LIST_REQUEST})
 
-		// const { data } = await api.get(`/products`)
-		const { data } = await dummmyFetchProducts()
+		const response:any = await productService.fetchProducts()
+		console.log("fetch products response " , response)
+		let { data } = response
+		data = productsAdapter(data)
+		// const { data } = await dummmyFetchProducts()
 		console.log("fetch products " , data)
 		dispatch({type:PRODUCT_LIST_SUCCESS, payload:data})
 	} catch (error) {
@@ -33,14 +37,19 @@ export const listProducts = () => async (dispatch) => {
  * @param offset page : starts from 0
  * @param limit no of records to show
  */
-export const listReviews = (id:number,device:string ='Android',offset=0,limit=25) => async (dispatch) => {
+export const listReviews = (id:number,name,device:string,offset=0,limit=25) => async (dispatch) => {
 	
 	try {
 
 		dispatch({type: PRODUCT_REVIEWS_LIST_REQUEST})
 
 		// const { data } = await api.get(`/products/${id}?device=${device}&offset=${offset}&limit=${limit}`)
-		const { data } = await dummmyFetchReviewsOfProductById(id,device,offset,limit)
+		// const { data } = await dummmyFetchReviewsOfProductById(id,device,offset,limit)
+		
+		const response:any = await productService.fetchReviews(device)
+		console.log("fetching reviews response " , response)
+		let { data } = response
+		data = reviewsAdapter(id,name,device,data)
 		console.log("reviews " , data)
 		dispatch({type:PRODUCT_REVIEWS_LIST_SUCCESS, payload:data})
 	} catch (error) {
@@ -54,8 +63,8 @@ const dummmyFetchProducts:() => Promise<any> = async () => {
 	const promise = new Promise((resolve,reject) => {
 		setTimeout(() => {
 	
-				console.log("resolving ", products)
-				resolve({data:products})
+			
+				resolve({data:getProductsTest()})
 		
 				
 		
@@ -70,17 +79,18 @@ const dummmyFetchReviewsOfProductById:(id:number,device:string,offset:number,lim
 	const promise = new Promise((resolve,reject) => {
 		setTimeout(() => {
 	
-				console.log("resolving ")
-				resolve({data:{
-					data:{
-						name:'Sonar',
-						id,
-						device,
-						reviews:getTestGridData()
+				
+				resolve({data:getReviewsByIdTest()})
+				// resolve({data:{
+				// 	data:{
+				// 		name:'Sonar',
+				// 		id,
+				// 		device,
+				// 		reviews:getTestGridData()
 						
-					},
-					count:10
-				}})
+				// 	},
+				// 	count:10
+				// }})
 		
 				
 		
@@ -88,5 +98,50 @@ const dummmyFetchReviewsOfProductById:(id:number,device:string,offset:number,lim
 	})
 
 	return promise
+}
+
+const productsAdapter = (data) => {
+	const newData = data.map(item =>{
+		return {
+			id:item._id,
+			name:item.product_name,
+			...item
+		}
+	})
+
+	return newData
+}
+
+const reviewsAdapter = (id,name,device,data) => {
+	
+  if(data && data.length > 0){
+		const details = data[0]
+		let newData = {
+			id,
+			name,
+			device,
+			reviews:details.reviews.map(review => {
+				return {
+					id:review.review_id,
+					key:Math.round(Math.random() * 100),
+					language:review.language,
+					country:review.country,
+					rating:review.rating,
+					version:review.version,
+					user:review.reviewer,
+					date:review.date,
+					review:review.text,
+					englishReview:review.translation,
+					...review
+
+					
+				}
+			})
+
+		}
+
+		return newData
+
+}
 }
 

@@ -1,4 +1,4 @@
- const getProducts = () => {
+ export const getProductsTest = () => {
 	return {
 		"error":null,
 		"data":[
@@ -102,7 +102,7 @@
 }
 
 
-const getReviewsById = () =>{
+export const getReviewsByIdTest = () =>{
 	return {
 		"error":false,
 		"data":[
@@ -160,7 +160,7 @@ const getReviewsById = () =>{
 
 export const mockFetchProducts = () => {
 	const promise = new Promise((resolve,reject) => {
-		 resolve(getProducts())
+		 resolve(getProductsTest())
 	})
 
 	return promise
@@ -168,7 +168,7 @@ export const mockFetchProducts = () => {
 
 export const mockFetchReviews = () => {
 	const promise = new Promise((resolve,reject) => {
-		 resolve(getReviewsById())
+		 resolve(getReviewsByIdTest())
 	})
 
 	return promise

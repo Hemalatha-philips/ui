@@ -5,8 +5,6 @@
 
 import { CaretDownOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
-import { products } from '../../mocks/data/products';
-import { QCheckbox } from './Checkbox';
 
 
 const { Option } = Select;
@@ -34,7 +32,7 @@ export const QSelect:React.FC<QSelectProps> = ({
 	 * @author Deepak_T
 	 */
 	const onChange = (value) => {
-		console.log(`selected ${value}`);
+		
 		onSelect(value)
 	}
 
@@ -42,7 +40,7 @@ export const QSelect:React.FC<QSelectProps> = ({
 	
 
 	
-console.log("selected " , selected)
+
 
 	return(
 		<Select

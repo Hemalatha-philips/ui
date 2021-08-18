@@ -1,19 +1,19 @@
 
-import React from "react"
+import { UserOutlined } from "@ant-design/icons";
 import { Layout, Menu } from 'antd';
+import React from "react";
+import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
+import { logoutUser } from '../../actions/user.action';
 // import Login from '../../components/Login/Login';
 import { BUTTONTEXT } from '../../content/en/buttons';
 import { HEADINGS } from '../../content/en/headings';
-
-import { useHistory } from "react-router-dom"
-import "./Layout.scss"
-import { useDispatch } from 'react-redux';
-import { logoutUser } from '../../actions/user.action';
 import { getCookie } from '../../utils/cookies';
 import { showToast } from '../../utils/toast';
-import { UserOutlined } from "@ant-design/icons";
+import "./Layout.scss";
 
-const { Header, Content, Footer } = Layout;
+
+const { Header, Content } = Layout;
 
 
 
