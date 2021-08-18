@@ -66,14 +66,24 @@ export const Admin = () => {
 		if(selectedProduct){
 			const name = getSelectedProduct().name
 			const getSelectedDeviceId = () => {
+				let devices:string[] = []
+				if(selectedDevice === 'Android'){
+					devices = ['android','google-play']
+				}else{
+					devices = ['ios' , 'ios-all']
+				}
+				const selectedDeviceId = getSelectedProduct().product_ids.find(item => {
+						return devices.indexOf(item.device) !== -1
+				})
 				
-				const selectedDeviceId = getSelectedProduct().product_ids.find(item => item.device === selectedDevice.toLowerCase())
-				
-				return selectedDeviceId.product_id
+				return selectedDeviceId ? selectedDeviceId.product_id:undefined
 			}
 			const deviceId = getSelectedDeviceId()
-		
+			console.log(" deviceId " , deviceId)
+		 if(deviceId){
 			dispatch(listReviews(selectedProduct!,name, deviceId,offset,limit))
+		 }
+			
 		}
 			
 	},[selectedProduct,selectedDevice,offset,limit])
